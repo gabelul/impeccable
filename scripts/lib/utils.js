@@ -267,42 +267,50 @@ export const PROVIDER_PLACEHOLDERS = {
   'claude-code': {
     model: 'Claude',
     config_file: 'CLAUDE.md',
-    ask_instruction: 'STOP and call the AskUserQuestionTool to clarify.'
+    ask_instruction: 'STOP and call the AskUserQuestionTool to clarify.',
+    command_prefix: '/'
   },
   'cursor': {
     model: 'the model',
     config_file: '.cursorrules',
-    ask_instruction: 'ask the user directly to clarify what you cannot infer.'
+    ask_instruction: 'ask the user directly to clarify what you cannot infer.',
+    command_prefix: '/'
   },
   'gemini': {
     model: 'Gemini',
     config_file: 'GEMINI.md',
-    ask_instruction: 'ask the user directly to clarify what you cannot infer.'
+    ask_instruction: 'ask the user directly to clarify what you cannot infer.',
+    command_prefix: '/'
   },
   'codex': {
     model: 'GPT',
     config_file: 'AGENTS.md',
-    ask_instruction: 'ask the user directly to clarify what you cannot infer.'
+    ask_instruction: 'STOP and call the ask_user_question tool to clarify.',
+    command_prefix: '/'
   },
   'agents': {
     model: 'the model',
     config_file: '.github/copilot-instructions.md',
-    ask_instruction: 'ask the user directly to clarify what you cannot infer.'
+    ask_instruction: 'ask the user directly to clarify what you cannot infer.',
+    command_prefix: '/'
   },
   'kiro': {
     model: 'Claude',
     config_file: '.kiro/settings.json',
-    ask_instruction: 'ask the user directly to clarify what you cannot infer.'
+    ask_instruction: 'ask the user directly to clarify what you cannot infer.',
+    command_prefix: '/'
   },
   opencode: {
     model: 'Claude',
     config_file: 'AGENTS.md',
     ask_instruction: 'STOP and call the `question` tool to clarify.',
+    command_prefix: '/'
   },
   'pi': {
     model: 'the model',
     config_file: 'AGENTS.md',
-    ask_instruction: 'ask the user directly to clarify what you cannot infer.'
+    ask_instruction: 'ask the user directly to clarify what you cannot infer.',
+    command_prefix: '/'
   }
 };
 
@@ -354,6 +362,7 @@ export function replacePlaceholders(content, provider, commandNames = []) {
     .replace(/\{\{model\}\}/g, placeholders.model)
     .replace(/\{\{config_file\}\}/g, placeholders.config_file)
     .replace(/\{\{ask_instruction\}\}/g, placeholders.ask_instruction)
+    .replace(/\{\{command_prefix\}\}/g, placeholders.command_prefix || '/')
     .replace(/\{\{available_commands\}\}/g, commandList);
 }
 

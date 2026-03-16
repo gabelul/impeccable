@@ -382,7 +382,12 @@ async function build() {
   const skillsDest = path.join(claudeCodeDest, 'skills');
 
   // Remove existing and copy fresh
-  if (fs.existsSync(skillsDest)) fs.rmSync(skillsDest, { recursive: true });
+  try {
+    if (fs.existsSync(skillsDest)) fs.rmSync(skillsDest, { recursive: true });
+  } catch {
+    // rmSync can fail on external volumes or broken symlinks — force remove via shell
+    execSync(`rm -rf "${skillsDest}"`);
+  }
 
   copyDirSync(skillsSrc, skillsDest);
 
